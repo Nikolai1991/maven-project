@@ -5,8 +5,8 @@ pipeline {
             jdk 'localJDK'
     }
     parameters {
-         string(name: 'tomcat_dev', defaultValue: '54.210.39.149', description: 'Staging Server')
-         string(name: 'tomcat_prod', defaultValue: '174.129.57.207', description: 'Production Server')
+         string(name: 'tomcat_dev', defaultValue: '54.172.112.30', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: '34.230.40.123', description: 'Production Server')
     }
 
     triggers {
