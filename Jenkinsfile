@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    tools {
+            maven 'Maven 3.5.2'
+            jdk 'jdk8'
+    }
     parameters {
          string(name: 'tomcat_dev', defaultValue: '54.210.39.149', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: '174.129.57.207', description: 'Production Server')
@@ -11,6 +14,14 @@ pipeline {
      }
 
 stages{
+        stage ('Initialize') {
+                steps {
+                    sh '''
+                        echo "PATH = ${PATH}"
+                        echo "M2_HOME = ${M2_HOME}"
+                    '''
+                }
+        }
         stage('Build'){
             steps {
                 sh 'mvn clean package'
