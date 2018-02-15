@@ -38,14 +38,14 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
+                        sh "ssh -i "jenkins.pem" ec2-user@ec2-54-172-112-30.compute-1.amazonaws.com"
                         sh "chown ec2-user /var/lib/tomcat7/webapps"
                         sh "scp -i /home/ec2-user/key/jenkins.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
-                    steps {
-                        h "chown ec2-user /var/lib/tomcat7/webapps"
+                    steps { 
                         sh "scp -i /home/ec2-user/key/jenkins.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
