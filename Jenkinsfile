@@ -38,13 +38,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/ec2-user/key/jenkins.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target/webapp.war ec2-user@54.172.112.30:/var/lib/tomcat7/webapps"
+                        sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i /home/ec2-user/key/jenkins.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target/webapp.war ec2-user@34.230.40.123:/var/lib/tomcat7/webapps"
+                        sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
             }
